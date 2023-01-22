@@ -30,6 +30,11 @@ import org.bukkit.entity.Slime;
 import org.bukkit.entity.Snowman;
 import org.bukkit.entity.Tameable;
 import org.bukkit.entity.WaterMob;
+import org.bukkit.entity.minecart.CommandMinecart;
+import org.bukkit.entity.minecart.ExplosiveMinecart;
+import org.bukkit.entity.minecart.HopperMinecart;
+import org.bukkit.entity.minecart.PoweredMinecart;
+import org.bukkit.entity.minecart.StorageMinecart;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -190,8 +195,11 @@ public class Commandremove extends EssentialsCommand {
                             break;
                         case MINECARTS:
                             if (e instanceof Minecart) {
-                                e.remove();
-                                removed++;
+                                final boolean onlyKillPassengerMinecartsConfig = true; // FIXME temporary before config option is added
+                                if (onlyKillPassengerMinecartsConfig && !(e instanceof StorageMinecart) && !(e instanceof HopperMinecart) && !(e instanceof PoweredMinecart) && !(e instanceof ExplosiveMinecart) && !(e instanceof CommandMinecart)) {
+                                    e.remove();
+                                    removed++;
+                                }
                             }
                             break;
                         case XP:
